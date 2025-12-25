@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
-
-import 'home_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'di/injection.dart';
+import 'views/home_view.dart';
+import 'cubit/user_cubit.dart';
 
 void main() {
-  runApp(const MyApp());
+  initGetIt();
+  runApp(const HandlingApis());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class HandlingApis extends StatelessWidget {
+  const HandlingApis({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: HomeView(),
+      home: BlocProvider(
+        create: (context) => getIt<UserCubit>(),
+        child: HomeView(),
+      ),
     );
   }
 }
