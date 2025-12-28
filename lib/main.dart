@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'di/injection.dart';
-import 'views/home_view.dart';
-import 'cubit/user_cubit.dart';
+import 'package:get/get.dart';
+import 'bindings/user_binding.dart';
+import 'views/users_view.dart';
 
 void main() {
-  initGetIt();
   runApp(const HandlingApis());
 }
 
@@ -14,13 +12,11 @@ class HandlingApis extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: BlocProvider(
-        create: (context) => getIt<UserCubit>(),
-        child: HomeView(),
-      ),
+      initialBinding: UserBinding(),
+      home: UsersView(),
     );
   }
 }

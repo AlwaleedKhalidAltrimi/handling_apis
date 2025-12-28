@@ -10,4 +10,8 @@ class UserRepo {
     var response = await apiServices.getAllUsers();
     return response.map((user) => UserModel.fromJson(user.toJson())).toList();
   }
+
+  Future<UserModel> getUserById(String userId) async {
+    return await apiServices.getUserById(userId);
+  }
 }
